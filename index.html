@@ -4,32 +4,92 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Lost Document</title>
+
+
 <style>
   * { margin:0; padding:0; }
   html, body { height:100%; }
 
   body {
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: red; /* to see gaps */
-  }
+  display:flex;
+  flex-direction: column;  /* Stack vertically */
+  align-items: stretch;    /* Fill width */
+  justify-content: flex-start;  /* Start from top */
+  background: red; 
+}
 
   button:focus{
   outline: none;
 }
 
-  #keyboard {
+#wall {
+    z-index: -1; 
     position: relative;
-    width: 80vw;
-    max-width: 800px;
+    width: 100vw;
+    height:  52vh;  
+    top: 0;  
   }
-  #keyboard .base {
+
+ 
+  .wall-bg {
+  height: 100%;          
+  width: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;          
+}
+
+#desktop {
+    position: relative;
+    width: 100vw;
+    height:  48vh;  
+    bottom: 0;  
+  }
+
+ 
+  .desktop-bg {
+  position: fixed;       
+  bottom: 0;           
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: auto;         
+  object-fit: contain;
+  image-rendering: pixelated;
+  pointer-events: none;
+  z-index: -1;         
+}
+
+  #keyboard {
+    position: absolute;
+    bottom: -45vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 1;        
+    width: 60vw;
+  }
+  .keyboard-bg {
     display: block;
     width: 100%;
     height: auto;              /* preserve real aspect ratio */
     image-rendering: pixelated;
   }
+
+  #monitor {
+    position: absolute;
+    bottom: -20vh;
+    left: 50%;  
+    transform: translateX(-50%);
+    z-index: 1;        
+    width: 40vw;
+  }
+  .monitor-bg {
+    display: block;
+    width: 100%;
+    height: auto;           /* preserve real aspect ratio */
+    image-rendering: pixelated;
+  }
+
 
 
   .small-mold {
@@ -38,7 +98,7 @@
     width:  4.05%;            /* 480 / 11850 * 100 */
     height: 8.5%;            /* 240 /  2900 * 100 */
 
-    background-image: url('moldybutton.png');
+    background-image: url('moldybutton.webp');
     background-repeat:  no-repeat;
     background-position: center center;
     background-size:     100% 100%;  /* fill every pixel */
@@ -55,7 +115,7 @@
     width:  4.05%;            /* 480 / 11850 * 100 */
     height: 8.5%;            /* 240 /  2900 * 100 */
 
-    background-image: url('normalButton.png');
+    background-image: url('normalButton.webp');
     background-repeat:  no-repeat;
     background-position: center center;
     background-size:     100% 100%;  /* fill every pixel */
@@ -71,7 +131,7 @@
     width:  4.05%;            /* 480 / 11850 * 100 */
     height: 16.5517%;            /* 240 /  2900 * 100 */
 
-    background-image: url('bigbutton.png');
+    background-image: url('bigbutton.webp');
     background-repeat:  no-repeat;
     background-position: center center;
     background-size:     100% 100%;  /* fill every pixel */
@@ -87,7 +147,7 @@
     width:  22.95358649789%;            /* 480 / 11850 * 100 */
     height: 8.5%;            /* 240 /  2900 * 100 */
 
-    background-image: url('spaceBar.png');
+    background-image: url('spaceBar.webp');
     background-repeat:  no-repeat;
     background-position: center center;
     background-size:     100% 100%;  /* fill every pixel */
@@ -99,7 +159,7 @@
 
 
   .small-mold:active {
-    background-image: url('moldybuttonClicked.png');
+    background-image: url('moldybuttonClicked.webp');
     background-repeat: no-repeat;
   background-position: center center;
 
@@ -114,7 +174,7 @@
 
 
   .big-button:active {
-    background-image: url('bigbuttonClicked.png');
+    background-image: url('bigbuttonClicked.webp');
     background-repeat: no-repeat;
   background-position: center center;
 
@@ -129,7 +189,7 @@
 
 
   .space-bar:active {
-    background-image: url('spaceBarClicked.png');
+    background-image: url('spaceBarClicked.webp');
     background-repeat: no-repeat;
   background-position: center center;
 
@@ -144,7 +204,7 @@
 
 
   .small-button:active {
-    background-image: url('clickedNormalButton.png');
+    background-image: url('clickedNormalButton.webp');
     background-repeat: no-repeat;
   background-position: center center;
 
@@ -156,124 +216,140 @@
   padding: 0;
   cursor: pointer;
   }
+
 </style>
 
 
 </head>
 
 <body>
-  <div id="keyboard">
-    <img src="keyboard.png" alt="Keyboard Base" class="base"/>
-    <button class="small-button" style="top: 23.75%;left: 4.45%;"></button>
 
-    <button class="small-button" style="top: 23.75%;left: 11.22%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 15.97%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 20.66%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 25.41%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 30.1%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 34.86%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 39.605%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 44.3%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 49.05%;"></button>
-
-    <button class="small-button" style="top: 23.75%;left: 57.77%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 62.53%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 67.28%;"></button>
-    <button class="small-button" style="top: 23.75%;left: 71.97%;"></button>
-
-    <button class="small-button" style="top: 23.75%;left: 90.91%;"></button>
-
-
-    <button class="small-button" style="top: 40.25%;left: 11.22%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 15.97%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 20.66%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 25.41%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 30.1%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 34.86%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 39.605%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 44.3%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 49.05%;"></button>
-
-    <button class="small-button" style="top: 40.25%;left: 57.77%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 62.53%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 67.28%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 71.97%;"></button>
-
-    <button class="small-button" style="top: 40.25%;left: 81.4%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 86.16%;"></button>
-    <button class="small-button" style="top: 40.25%;left: 90.91%;"></button>
-
-    <button class="small-mold" style="top: 45.7%;left: 4.45%;"></button>
-
-    <button class="small-button" style="top: 51.22%;left: 11.22%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 15.97%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 20.66%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 25.41%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 30.1%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 34.86%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 39.605%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 44.3%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 49.05%;"></button>
-
-    <button class="small-button" style="top: 51.22%;left: 57.77%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 62.53%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 67.28%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 71.97%;"></button>
-
-    <button class="small-button" style="top: 51.22%;left: 81.4%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 86.16%;"></button>
-    <button class="small-button" style="top: 51.22%;left: 90.91%;"></button>
-
-
-    <button class = "big-button" style="top:57%;left:4.45%"></button>
-
-    <button class="small-button" style="top: 65.22%;left: 11.22%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 15.97%;"></button>
-
-    <button class = "space-bar" style="top:65.22%;left:20.67%"></button>
-
-    <button class="small-button" style="top: 65.22%;left: 44.3%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 49.05%;"></button>
-
-    <button class="small-button" style="top: 65.22%;left: 57.77%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 62.53%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 67.28%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 71.97%;"></button>
-
-    <button class="small-button" style="top: 65.22%;left: 81.4%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 86.16%;"></button>
-    <button class="small-button" style="top: 65.22%;left: 90.91%;"></button>
-
-
+  <div id = "wall">
+    <img src="wall.webp" alt="wall" class="wall-bg"/>
   </div>
+
+  <div id="desktop">
+    <img src="desktop1.webp" alt="desktop" class="desktop-bg"/>
+    <div id = "monitor">
+        <img src="monitor.webp" alt="monitor" class="monitor-bg"/>
+    </div>
+    <div id="keyboard">
+        <img src="keyboard.webp" alt="Keyboard Base" class="keyboard-bg"/>
+        <button class="small-button" style="top: 23.75%;left: 4.45%;"></button>
+    
+        <button class="small-button" style="top: 23.75%;left: 11.22%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 15.97%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 20.66%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 25.41%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 30.1%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 34.86%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 39.605%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 44.3%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 49.05%;"></button>
+    
+        <button class="small-button" style="top: 23.75%;left: 57.77%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 62.53%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 67.28%;"></button>
+        <button class="small-button" style="top: 23.75%;left: 71.97%;"></button>
+    
+        <button class="small-button" style="top: 23.75%;left: 90.91%;"></button>
+    
+    
+        <button class="small-button" style="top: 40.25%;left: 11.22%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 15.97%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 20.66%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 25.41%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 30.1%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 34.86%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 39.605%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 44.3%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 49.05%;"></button>
+    
+        <button class="small-button" style="top: 40.25%;left: 57.77%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 62.53%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 67.28%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 71.97%;"></button>
+    
+        <button class="small-button" style="top: 40.25%;left: 81.4%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 86.16%;"></button>
+        <button class="small-button" style="top: 40.25%;left: 90.91%;"></button>
+    
+        <button class="small-mold" style="top: 45.7%;left: 4.45%;"></button>
+    
+        <button class="small-button" style="top: 51.22%;left: 11.22%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 15.97%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 20.66%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 25.41%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 30.1%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 34.86%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 39.605%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 44.3%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 49.05%;"></button>
+    
+        <button class="small-button" style="top: 51.22%;left: 57.77%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 62.53%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 67.28%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 71.97%;"></button>
+    
+        <button class="small-button" style="top: 51.22%;left: 81.4%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 86.16%;"></button>
+        <button class="small-button" style="top: 51.22%;left: 90.91%;"></button>
+    
+    
+        <button class = "big-button" style="top:57%;left:4.45%"></button>
+    
+        <button class="small-button" style="top: 65.22%;left: 11.22%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 15.97%;"></button>
+    
+        <button class = "space-bar" style="top:65.22%;left:20.67%"></button>
+    
+        <button class="small-button" style="top: 65.22%;left: 44.3%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 49.05%;"></button>
+    
+        <button class="small-button" style="top: 65.22%;left: 57.77%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 62.53%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 67.28%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 71.97%;"></button>
+    
+        <button class="small-button" style="top: 65.22%;left: 81.4%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 86.16%;"></button>
+        <button class="small-button" style="top: 65.22%;left: 90.91%;"></button>
+    
+    
+      </div>
+  </div>
+
 </body>
 
-<script>
+<script>    
+
+    const audioFiles = {
+    moldy: new Audio('moldybutton-click.mp3'),
+    big: new Audio('bigbutton-click.mp3'),
+    space: new Audio('spacebar-click.mp3'),
+    normal: new Audio('normalClicked.mp3')
+    };
 
     document.querySelector('.small-mold').addEventListener('click' , () => {
-      const audio = new Audio('moldybutton-click.mp3');
-      audio.currentTime = 0;
-      audio.play();
+      audioFiles.moldy.currentTime = 0;
+      audioFiles.moldy.play();
     });
 
    document.querySelector('.big-button').addEventListener('click' , () => {
-      const audio = new Audio('bigbutton-click.mp3');
-      audio.currentTime = 0;
-      audio.play();
+      audioFiles.big.currentTime = 0;
+      audioFiles.big.play();
     });
 
 
     document.querySelector('.space-bar').addEventListener('click' , () => {
-      const audio = new Audio('spacebar-click.mp3');
-      audio.currentTime = 0;
-      audio.play();
+      audioFiles.space.currentTime = 0;
+      audioFiles.space.play();
     });
 
     document.querySelectorAll('.small-button').forEach(btn=> {
     btn.addEventListener('click', () => {
-      const audio = new Audio('normalClicked.mp3');
-      audio.currentTime = 0;
-      audio.play();
+      audioFiles.normal.currentTime = 0;
+      audioFiles.normal.play();
     });
 });
   </script>
