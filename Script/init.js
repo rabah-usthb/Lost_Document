@@ -3,9 +3,14 @@ import * as keyEvent from './keyEvent.js';
 
 
 var hello_Message = ''; 
+export var face = '';
+export var who_data = '';
 
-
- fetch('../Ascii/hello.txt').then(r => r.text()).then((data) => { hello_Message = data; initTerminal();});
+ fetch('../Ascii/hello.txt').then(r => r.text()).then((data) => {
+    fetch('../Ascii/data.txt').then(r => r.text()).then((data) => { who_data = data;});
+    fetch('../Ascii/face.txt').then(r => r.text()).then((data) => { face = data;});
+    hello_Message = data; initTerminal();
+    });
 
 
 function initTerminal() {

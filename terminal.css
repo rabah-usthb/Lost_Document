@@ -1,45 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: hsl(210, 95%, 57%);
+    text-shadow: 0 0 4px hsl(210, 95%, 57%);
+}
+
 body {
     background: hsl(154 50% 5%);
     color: hsl(154 84% 70%);
     text-shadow: 0 0 4px hsl(154 84% 70%);
     font-family: monospace;
     font-size: 16px;
-  }
+}
 
-
-  #hello {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-
-  #username {
-    margin-right: 5px;
-  }
-  
-  .terminal {
+.terminal { 
     margin: auto;
-    margin-top: 10vh;
+    margin-top: 5vh;
     display: table;
-  }
-  
-  #glare {
+    width: 90vw; 
+}
+
+
+#hello {
+    display: table;     
+    margin: 0 auto 20px;            
+    white-space: pre;               
+    font-size: 16px;
+}
+
+#username {
+    margin-right: 5px;
+}
+
+#whoami {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin: 20px 0; 
+}
+
+#face {
+    display: block;    
+    white-space: pre;
+    font-size: 3px; 
+    line-height: 1.1;
+    flex-shrink: 0;
+    max-width: 50vw;
+    overflow: hidden;
+    margin-right: 5px;
+}
+
+
+
+#data {
+    display: block;   
+    white-space: pre;
+    font-size: 10px; 
+    line-height: 1.2;
+    align-items: center;
+    max-width: 40vw;
+    flex-shrink: 1;
+}
+
+#glare {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: -1; /* ensure the effect doesn't cover the text */
+    z-index: -1;
     background: radial-gradient(hsl(154 5% 15%) 0%, hsl(154 50% 5%) 70%);
-  }
-  
-  @keyframes lines {
+}
+
+@keyframes lines {
     0% {background-position: 0px 0px}
     50% {background-position: 0px 0px}
     51% {background-position: 0px 2px}
     100% {background-position: 0px 2px}
-  }
-  
-  #interlaced {
+}
+
+#interlaced {
     position: fixed;
     background: repeating-linear-gradient(transparent 0px 1px, hsl(154 0% 0%/.3) 3px 4px);
     top: 0;
@@ -49,15 +93,15 @@ body {
     z-index: 1;
     pointer-events: none;
     animation: lines 0.06666666s linear infinite;
-  }
-  
-  @keyframes blink {
+}
+
+@keyframes blink {
     0% {opacity: 0}
     30% {opacity: 1}
     70% {opacity: 1}
     100% {opacity: 0}
-  }
-  
-  #blink {
+}
+
+#blink {
     animation: blink 0.4s linear infinite;
-  }
+}

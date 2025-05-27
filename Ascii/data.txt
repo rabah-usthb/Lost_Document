@@ -1,0 +1,23 @@
+╔═══════════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                       ║
+║  • FULL NAME : CHABANE CHAOUCHE RABAH                                                 ║
+║                                                                                       ║
+║  • COUNTRY : ALGERIA                                                                  ║
+║                                                                                       ║
+║  • AGE : 20                                                                           ║
+║                                                                                       ║
+║  • UNIVERSITY : The University of Science and Technology – Houari Boumediene (USTHB)  ║
+║                                                                                       ║
+║  • LEVEL : 3RD YEAR SOFTWARE ENGINNER                                                 ║
+║                                                                                       ║
+║  • EXPECTED GRADUATION  : June 2027                                                   ║
+║                                                                                       ║
+║  • EMAIL : chabanechaoucherabah4@gmail.com                                            ║
+║                                                                                       ║
+║  • GITHUB : <a href="https://github.com/rabah-usthb">https://github.com/rabah-usthb</a>                                            ║
+║                                                                                       ║
+║  • SKILLS : Latex , Java , JavaFX , PHP , C , JS                                      ║                                           
+║                                                                                       ║   
+║  • LANGAUGES : Arabic(basics) , Kabyle(native) , French(fluent) , English(fluent)     ║                             
+║                                                                                       ║
+╚═══════════════════════════════════════════════════════════════════════════════════════╝
