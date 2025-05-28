@@ -15,8 +15,8 @@ export var who_data = '';
 
 function initTerminal() {
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<h1 id="hello">${hello_Message}</h1>`);
-    terminal.terminal_content.insertAdjacentHTML('beforeend',`<p id = "line"><span id = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`);
-    terminal.setCommandLine(document.getElementById('line'));
+    terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`);
+    terminal.setCommandLine(document.querySelector('.line'));
     console.log(terminal.commandLine.childNodes);
     keyEvent.setCursor(terminal.commandLine.childNodes[1]);
     document.addEventListener('keydown', keyEvent.handleKey);

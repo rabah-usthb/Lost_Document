@@ -1,23 +1,78 @@
 import * as sound from './sound.js';
 import * as init from './init.js';
 import * as terminal from './terminal.js';
-
+import * as history from './history.js';
 
 
 var cursor = '';
 
 export function setCursor(node) {
     cursor = node;
-    console.log('cursor ',cursor);
 }
 
 function isTextNode(node) {
     return node.nodeType === Node.TEXT_NODE;
 }
 
+function runCommand(command) {
+    var b = true;
+    switch (command) {
+        case 'whoami':
+         terminal.terminal_content.insertAdjacentHTML('beforeend',`<div id="whoami"><span id="face">${init.face}</span><span id ="data">${init.who_data}</span></div>`);
+           break;
+        
+        case 'clear':
+        case 'cls':
+            console.log('ss');
+            terminal.terminal_content.innerHTML = `<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`;
+            terminal.setCommandLine(document.querySelector('.line'));
+            setCursor(terminal.commandLine.childNodes[1]);
+            b = false;
+            break;
+
+        case 'reboot':
+            window.location.reload();
+            b = false;
+            break;
+        case 'shutdown':
+            window.close();
+            b = false;
+            break;
+        default:
+         terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "error">Error Shell Command '${command}'</p>`)
+           break;
+    }
+
+    return b;
+}
 
 
-console.log(cursor);
+function EnterEvent() {
+    const previousNode = cursor.previousSibling;
+    const nextNode = cursor.nextSibling;
+    var command;
+    if(isTextNode(previousNode)) {
+        command = previousNode.data+nextNode.data;
+    }
+    else {
+    command = nextNode.data;
+    }
+    
+    command = command.trim();
+    var b = true;
+    if(command!=='') {
+        b=  runCommand(command); 
+        history.appendCommand(command);  
+    }
+    if(b){
+    terminal.commandLine.removeChild(cursor);
+    terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`);
+    const promptList = document.querySelectorAll('.line');
+    terminal.setCommandLine(promptList[promptList.length-1]);
+    setCursor(terminal.commandLine.childNodes[1]);
+    }
+}
+
 
 function BackspaceEvent() {
     const previousNode = cursor.previousSibling;
@@ -25,6 +80,35 @@ function BackspaceEvent() {
       const newText = previousNode.data.substring(0,previousNode.data.length-1);
       previousNode.data = newText;
     }
+}
+
+
+function ArrowDownEvent() {    
+    history.increaseIndex();
+    const previousNode = cursor.previousSibling;
+    if(isTextNode(previousNode)) {
+        previousNode.data = history.commandHistory[history.index];
+    }
+    else {
+    const previousText = document.createTextNode(history.commandHistory[history.index]);
+    terminal.commandLine.insertBefore(previousText,cursor);
+    }
+    const nextNode = cursor.nextSibling;
+    nextNode.data = ' ';
+}
+
+function ArrowUpEvent() {
+    history.decreaseIndex();
+    const previousNode = cursor.previousSibling;
+    if(isTextNode(previousNode)) {
+        previousNode.data = history.commandHistory[history.index];
+    }
+    else {
+    const previousText = document.createTextNode(history.commandHistory[history.index]);
+    terminal.commandLine.insertBefore(previousText,cursor);
+    }
+    const nextNode = cursor.nextSibling;
+    nextNode.data = ' ';    
 }
 
 function ArrowLeftEvent() {
@@ -54,6 +138,8 @@ function ArrowRightEvent() {
 }
 
 export function handleKey(e) {
+
+    console.log(terminal.commandLine,' ',e.key);
     if (e.key === ' ') {
         sound.spaceSound();
       }
@@ -70,8 +156,7 @@ export function handleKey(e) {
         BackspaceEvent();
     }
     else if (e.key==='Enter') {
-        terminal.terminal_content.insertAdjacentHTML('beforeend',`<div id="whoami"><span id="face">${init.face}</span><span id ="data">${init.who_data}</span></div>`);
-
+        EnterEvent();
     }
     else if(e.key==='ArrowLeft') {
         ArrowLeftEvent();
@@ -79,6 +164,16 @@ export function handleKey(e) {
     }
     else if(e.key==='ArrowRight') {
         ArrowRightEvent();
+    }
+    else if(e.key==='ArrowUp') {
+        if(history.index >0){
+            ArrowUpEvent();
+        }
+    }
+    else if(e.key === 'ArrowDown') {
+        if(history.index <(history.commandHistory.length-1)){
+        ArrowDownEvent();
+        }
     }
     else {
     const previousNode = cursor.previousSibling;
