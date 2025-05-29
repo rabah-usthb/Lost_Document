@@ -18,12 +18,36 @@ function runCommand(command) {
     var b = true;
     switch (command) {
         case 'whoami':
-         terminal.terminal_content.insertAdjacentHTML('beforeend',`<div id="whoami"><span id="face">${init.face}</span><span id ="data">${init.who_data}</span></div>`);
+           terminal.terminal_content.insertAdjacentHTML('beforeend',`<div class="info-terminal">
+  <table>
+    <tr>
+      <td style="vertical-align: top; white-space: pre;">
+        <pre id = "face">${init.face}</pre>
+      </td>
+      <td style="vertical-align: top;">
+        <table class="info">
+          <tr><td><span class='bullet'>• FULL NAME : </span>RABAH CHABANE CHAOUCHE</td></tr>
+          <tr><td><span class='bullet'>• COUNTRY : </span>ALGERIA</td></tr>
+          <tr><td><span class='bullet'>• AGE : </span>20</td></tr>
+          <tr><td><span class='bullet'>• UNIVERSITY : </span>The University of Science and Technology-Houari Boumediene</td></tr>
+          <tr><td><span class='bullet'>• LEVEL : </span>3RD YEAR SOFTWARE ENGINEER</td></tr>
+          <tr><td><span class='bullet'>• EXPECTED GRADUATION : </span>June 2027</td></tr>
+          <tr><td><span class='bullet'>• EMAIL : </span>chabanechaoucherabah4@gmail.com</td></tr>
+          <tr><td><span class='bullet'>• GITHUB : </span><a href="https://github.com/rabah-usthb" target="_blank">github.com/rabah-usthb</a></td></tr>
+          <tr><td><span class='bullet'>• SKILLS : </span>LaTeX, Java, JavaFX, PHP, C, JS</td></tr>
+          <tr><td><span class='bullet'>• LANGUAGES : </span>Arabic, Kabyle, French, English</td></tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</div>
+`
+);
+         //terminal.terminal_content.insertAdjacentHTML('beforeend',`<div id="whoami"><span id="face">${init.face}</span><span id ="data">${init.who_data}</span></div>`);
            break;
         
         case 'clear':
         case 'cls':
-            console.log('ss');
             terminal.terminal_content.innerHTML = `<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`;
             terminal.setCommandLine(document.querySelector('.line'));
             setCursor(terminal.commandLine.childNodes[1]);
@@ -34,6 +58,66 @@ function runCommand(command) {
             window.location.reload();
             b = false;
             break;
+        case 'history':
+            let rows = '';
+            for (let i = 0; i < history.commandHistory.length; i++) {
+            rows += `
+                <tr>
+                <td>${i + 1}</td>
+                <td>${history.commandHistory[i]}</td>
+                </tr>
+            `;
+            }
+            terminal.terminal_content.insertAdjacentHTML('beforeend',`
+                <table class="normal-table">
+                    <tr>
+                        <th>ID</th>
+                        <th>COMMAND</th>
+                    </tr>
+                    ${rows}
+                </table>
+            `
+            );
+            break;
+        case 'help':
+            terminal.terminal_content.insertAdjacentHTML('beforeend',`
+                    <table class="normal-table">
+                    <tr>
+                        <th>COMMAND</th>
+                        <th>DESCRIPTION</th>
+                    </tr>
+                    <tr>
+                        <td>cls/clear</td>
+                        <td>Clear Terminal Content</td>
+                    </tr>
+                    <tr>
+                        <td>hello</td>
+                        <td>Show ASCII Art Of 'HELLO VISITOR'</td>
+                    </tr>
+                    <tr>
+                        <td>help</td>
+                        <td>List All Available Commands And Their Descriptions</td>
+                    </tr>
+                    <tr>
+                        <td>history</td>
+                        <td>List All Previously Executed Commands</td>
+                    </tr>
+                    <tr>
+                        <td>reboot</td>
+                        <td>Reboot The Terminal System</td>
+                    </tr>
+                    <tr>
+                        <td>whoami</td>
+                        <td>Show User Data Including Their Image</td>
+                    </tr>
+                    </table>
+
+            `
+            );
+            break;
+        case 'hello':
+            terminal.terminal_content.insertAdjacentHTML('beforeend',`<h1 class="hello">${init.hello_Message}</h1>`);
+            break;   
         case 'shutdown':
             window.close();
             b = false;
@@ -61,8 +145,8 @@ function EnterEvent() {
     command = command.trim();
     var b = true;
     if(command!=='') {
-        b=  runCommand(command); 
         history.appendCommand(command);  
+        b=  runCommand(command); 
     }
     if(b){
     terminal.commandLine.removeChild(cursor);
@@ -71,6 +155,8 @@ function EnterEvent() {
     terminal.setCommandLine(promptList[promptList.length-1]);
     setCursor(terminal.commandLine.childNodes[1]);
     }
+
+    document.body.scrollIntoView({ block: "end", behavior: "smooth" });
 }
 
 
@@ -159,18 +245,22 @@ export function handleKey(e) {
         EnterEvent();
     }
     else if(e.key==='ArrowLeft') {
+        e.preventDefault();
         ArrowLeftEvent();
       
     }
-    else if(e.key==='ArrowRight') {
+    else if(e.key==='ArrowRight'){ 
+        e.preventDefault();
         ArrowRightEvent();
     }
     else if(e.key==='ArrowUp') {
+        e.preventDefault();
         if(history.index >0){
             ArrowUpEvent();
         }
     }
     else if(e.key === 'ArrowDown') {
+        e.preventDefault();
         if(history.index <(history.commandHistory.length-1)){
         ArrowDownEvent();
         }

@@ -14,7 +14,7 @@
 ║                                                                                       ║
 ║  • EMAIL : chabanechaoucherabah4@gmail.com                                            ║
 ║                                                                                       ║
-║  • GITHUB : <a href="https://github.com/rabah-usthb">https://github.com/rabah-usthb</a>                                            ║
+║  • GITHUB : <a href="https://github.com/rabah-usthb" target="_blank">https://github.com/rabah-usthb</a>                                            ║
 ║                                                                                       ║
 ║  • SKILLS : Latex , Java , JavaFX , PHP , C , JS                                      ║                                           
 ║                                                                                       ║   

@@ -23,8 +23,12 @@ body {
     width: 90vw; 
 }
 
+.line {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
 
-#hello {
+.hello {
     display: table;     
     margin: 0 auto 20px;            
     white-space: pre;               
@@ -58,7 +62,7 @@ body {
     flex-shrink: 0;
     max-width: 50vw;
     overflow: hidden;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 
@@ -112,3 +116,59 @@ body {
 #blink {
     animation: blink 0.4s linear infinite;
 }
+
+
+.info-terminal pre {
+    margin: 0;
+    padding: 0;
+  }
+
+.info-terminal {
+    padding-top: 0px;
+    padding-left: 30px;
+    padding-right: 30px;  
+    display: table;
+    margin: 0 auto 20px;            
+    white-space: pre;   
+    border: 1px solid currentColor;
+    box-shadow:
+      inset 0 0 8px currentColor,   /* inner glow */
+      0 0 4px currentColor;         /* outer glow */
+    background: transparent;
+  }
+
+  /* your table itself */
+  .info-terminal table {
+    padding: 0; 
+    border-collapse: collapse;
+    width: max-content;            /* shrink to fit */
+  }
+  
+  td,th {
+    text-align: left;
+    padding-bottom: 10px;
+  }
+
+  .bullet{
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  .normal-table  {
+    box-shadow:
+    inset 0 0 8px currentColor,0 0 4px currentColor;  
+    border-collapse: collapse;
+    display: table;
+    margin: 0 auto 20px;            
+    white-space: pre;
+    border:1px solid  hsl(154 84% 70%);
+    width: max-content;
+    padding: 10px;
+  }
+
+  .normal-table th , .normal-table td{
+    box-shadow:
+    inset 0 0 8px currentColor,0 0 4px currentColor;  
+    border:1px solid  hsl(154 84% 70%);
+    padding: 10px;
+  }
