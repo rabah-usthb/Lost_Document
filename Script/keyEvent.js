@@ -3,8 +3,19 @@ import * as init from './init.js';
 import * as terminal from './terminal.js';
 import * as history from './history.js';
 
+function linkEvent() {
+    document.querySelectorAll('a').forEach(link=> {
+        link.addEventListener('click', (e) => {
+        sound.mouseSound();
+        e.stopPropagation();
+    });
+    });    
+}
+
+
 
 var cursor = '';
+const preview = document.getElementById('preview');
 
 export function setCursor(node) {
     cursor = node;
@@ -103,6 +114,10 @@ function runCommand(command) {
                         <td>List All Previously Executed Commands</td>
                     </tr>
                     <tr>
+                        <td>projects</td>
+                        <td>Displays a project table where each row is clickable to open a preview.</br>Press 'Q' or 'q' to quit the preview.</td>
+                    </tr>
+                    <tr>
                         <td>reboot</td>
                         <td>Reboot The Terminal System</td>
                     </tr>
@@ -111,9 +126,29 @@ function runCommand(command) {
                         <td>Show User Data Including Their Image</td>
                     </tr>
                     </table>
-
             `
             );
+            break;
+        case 'projects':
+            terminal.terminal_content.insertAdjacentHTML('beforeend',`
+                <table class="normal-table">
+                <tr>
+                    <th>PROJECT NAME</th>
+                    <th>TECHNOLOGIES</th>
+                    <th>DESCRIPTION</th>
+                    <th>LINKS</th>
+                </tr>
+                <tr class ="clickable-row" data-path="FILE: ~/Projects/Compile.txt">
+                    <td>Mini_Compiler</td>
+                    <td>• Java</br>• JavaFx</br>• RichTextFx</br>• ANTLR4</br>• NSIS</td>
+                    <td class="wrap-text">A small IDE featuring syntax highlighting and a console log for the view. The compiler is implemented up to the semantic phase</td>
+                    <td>• <a href="https://github.com/rabah-usthb/Compiler" target="_blank">Github_Repository</a></br>• <a href="https://github.com/rabah-usthb/Compiler/blob/main/document.pdf" target="_blank">Documentation</a></td>
+                </tr>
+                </table>
+        `
+        );
+            linkEvent();
+            rowEvent();
             break;
         case 'hello':
             terminal.terminal_content.insertAdjacentHTML('beforeend',`<h1 class="hello">${init.hello_Message}</h1>`);
@@ -227,6 +262,7 @@ export function handleKey(e) {
 
     console.log(terminal.commandLine,' ',e.key);
     if (e.key === ' ') {
+        e.preventDefault();
         sound.spaceSound();
       }
 
@@ -265,7 +301,7 @@ export function handleKey(e) {
         ArrowDownEvent();
         }
     }
-    else {
+    else if( e.key.length===1 &&(e.key ===' ' ||(e.key>='a' && e.key<='z') || (e.key>='A' && e.key<='Z'))){
     const previousNode = cursor.previousSibling;
    // console.log(terminal.commandLine.childNodes)
     if(isTextNode(previousNode)) {
@@ -278,4 +314,116 @@ export function handleKey(e) {
     terminal.commandLine.insertBefore(newText,cursor);
     }
     }
+
 }
+
+    function quitPreview() {
+        console.log('quit ');
+        preview.classList.replace('active', 'hidden');
+        preview.innerHTML =` <span id="preview_cursor"></span>
+          <div id="status-bar">
+            <div id="fileName"></div>
+          </div>
+          <div class="glare"></div>`;
+        document.addEventListener('keydown', handleKey);
+        document.removeEventListener('keydown',previewEvent);
+    }
+
+
+    function previewEvent(e) {
+        console.log('previewEvent ',e.key);
+        if (e.key === ' ') {
+            e.preventDefault();
+            sound.spaceSound();
+          }
+    
+        else if (e.key ==='Enter') {
+            sound.enterSound();
+        }
+        else {
+            sound.normalSound();
+        }
+    
+        
+        if(e.key==='q' || e.key === 'Q') {
+            quitPreview();
+        }
+    }
+   
+
+    function rowEvent() {
+        document.querySelectorAll('.clickable-row').forEach(btn=> {
+            btn.addEventListener('click', () => {
+              sound.mouseSound();
+              document.removeEventListener('keydown', handleKey);
+              document.addEventListener('keydown',previewEvent);
+              document.getElementById('fileName').textContent = btn.dataset.path;
+              preview.insertAdjacentHTML('beforeend',`<h1>${init.description}</h1>`);
+              preview.insertAdjacentHTML('beforeend',`<p><strong>Mini_Compiler</strong> is a lightweight code editor designed for educational compilers. It features syntax highlighting, an integrated console log, and step-by-step output for lexical, syntactic, and semantic analysis. Built with an intuitive JavaFX GUI, it also offers seamless installation through JLink and an MSI installer made using NSIS.</p>`);
+              preview.insertAdjacentHTML('beforeend',`<h1>${init.technologies}</h1>`);
+              preview.insertAdjacentHTML('beforeend',`<ul>
+                                                            <li><span class="item_title">Java:</span> Used for both the frontend and application logic.</span></li>
+                                                            <li><span class="item_title">JavaFX:</span> UI framework for building the desktop interface.</li>
+                                                            <li><span class="item_title">RichTextFX:</span> Library built on top of JavaFX to enable advanced code editor features like syntax highlighting.</li>
+                                                            <li><span class="item_title">ANTLR4:</span> Parser generator used to implement an LL(*) top-down compiler.</li>
+                                                            <li><span class="item_title">JLink:</span> Tool to bundle a custom minimal JRE for distribution on any target system.</li>
+                                                            <li><span class="item_title">NSIS:</span> Scripting Language to generate a Windows-compatible MSI installer.</li>
+                                                     </ul>`);
+              preview.insertAdjacentHTML('beforeend',`<h1>${init.features}</h1>`);
+              preview.insertAdjacentHTML('beforeend',`
+                <p><span class='item_title'>Syntax Highlighting:</span> Implemented syntax highlighting by mapping ANTLR4 token IDs to CSS class names using <code>StyleSpansBuilder</code> from RichTextFX.</p>
+                <video autoplay loop muted playsinline class="retro-video">
+                    <source src="../Preview/Compiler/syntax.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                <p><span class='item_title'>Lexer Button:</span> Executes lexical analysis and displays the result in the console log by listing all recognized tokens with their types, as well as any unrecognized tokens and out of bound tokens.</p>
+                <video autoplay loop muted playsinline class="retro-video">
+                    <source src="../Preview/Compiler/lex.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                <p><span class='item_title'>Parser Button:</span> Executes parsing analysis and opens a new window displaying the ANTLR4 parse tree as a graphical interface. Parsing errors and lexical output are shown in the console log.</p>
+                <video autoplay loop muted playsinline class="retro-video">
+                    <source src="../Preview/Compiler/parser.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                <p><span class='item_title'>Semantic Button:</span>  Executes semantic analysis and opens a new tabbed window containing semantic tables, including the keyword table, constant table, identifier table, and expression table.</p>
+                    <video autoplay loop muted playsinline class="retro-video">
+                    <source src="../Preview/Compiler/sem.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                `);
+              preview.insertAdjacentHTML('beforeend',`<h1>${init.deploy}</h1>`);
+              preview.insertAdjacentHTML('beforeend', `
+                <ul>
+                  <li><span class="item_title">JLink:</span >Used to bundle a custom minimal JRE containing only the necessary JavaFX modules, core JDK, and libraries like ANTLR4 and RichTextFX. This ensures the application runs with its own JRE rather than relying on the user's system JRE.</li>
+                  <li><span class="item_title">NSIS:</span> A lightweight script was used to create a minimal MSI installer that extracts the bundled JRE, the executable JAR, and a launcher for smooth installation.</li>
+                </ul>
+                 <video autoplay loop muted playsinline class="retro-video">
+                    <source src="../Preview/Compiler/nsis.webm" type="video/webm">
+                        Your browser does not support the video tag.
+                    </video>
+                `);
+              preview.insertAdjacentHTML('beforeend',`<h1>${init.link}</h1>`);
+              preview.insertAdjacentHTML('beforeend', `
+                <ul>
+                  <li><span class="item_title">Github Repository:</span> <a href="https://github.com/rabah-usthb/Compiler" target="_blank">https://github.com/rabah-usthb/Compiler</a>.</li>
+                  <li><span class="item_title">Document:</span> <a href="https://github.com/rabah-usthb/Compiler/blob/main/document.pdf" target="_blank">https://github.com/rabah-usthb/Compiler/blob/main/document.pdf</a>.</li>
+                  <li><span class="item_title">Installation:</span> <a href="https://github.com/rabah-usthb/Compiler/releases/tag/v1.0.0" target="_blank">https://github.com/rabah-usthb/Compiler/releases/tag/v1.0.0</a>.</li>
+                </ul>
+                `);
+              preview.insertAdjacentHTML('beforeend',`<h1>${init.download}</h1>`);
+              preview.insertAdjacentHTML('beforeend', `
+                <ul>
+                  <li class="last"><span class="item_title">Document:</span> <a href="../Preview/Compiler/document.pdf" download>document.pdf</a>.</li>
+                </ul>
+                `);
+              preview.insertAdjacentHTML('beforeend',`<div id="spacer" ></div>`);
+              preview.classList.replace('hidden', 'active');
+              linkEvent();
+            });
+        });
+        
+    }
+   
+    
+  

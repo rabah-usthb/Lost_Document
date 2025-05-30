@@ -1,0 +1,111 @@
+#preview {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: hsl(154 50% 5%);
+    z-index: 6;
+    overflow-y: visible;
+    display: none; 
+    box-sizing: border-box;
+    margin-bottom: 180px;
+}
+
+  #preview.active {
+    display: block;
+  }
+
+  #status-bar {
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0.5%;
+    width: 100%;
+    background:hsl(154, 47%, 3%);
+    color:  hsl(154 84% 70%);
+    font-size: 15px;
+    padding: 8px 25px;
+    display: flex;
+    border: 1px solid hsl(154 84% 70%);;
+    box-shadow:
+    inset 0 0 8px currentColor,  0 0 4px currentColor;    
+    z-index: 99;
+    padding-right:40px ;
+}
+
+#fileName {
+    background: hsl(154, 50%, 10%);      /* darker green base */
+    color: hsl(154, 100%, 75%);          /* neon green text */
+    padding: 3px 6px;
+    border: 1px solid hsl(154, 100%, 70%);
+    box-shadow: 0 0 3px hsl(154, 100%, 65%), inset 0 0 2px hsl(154, 100%, 50%);
+    font-weight: bold;
+}
+
+#percent {
+    margin-left: auto;
+}
+
+#line_col{
+    margin-left: 100px;
+}
+
+#preview h1 {        
+    white-space: pre;               
+    font-size: 11px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+#preview p {
+    margin-bottom: 30px;
+    margin-left: 15px;
+}
+
+#preview_cursor {
+    position: absolute;
+    width: 9.6px;  /* Match character width */
+    height: 19.2px; /* Match line height */
+    box-sizing: border-box;
+    background: hsl(154, 100%, 70%, 0.3);
+    border: 1px solid hsl(154, 100%, 70%);
+    box-shadow: 0 0 3px hsl(154, 100%, 65%), inset 0 0 2px hsl(154, 100%, 50%);
+    mix-blend-mode: difference;
+    z-index: 7;
+    pointer-events: none;
+    transition: all 0.05s ease;
+    top: 15px;  /* Initial padding */
+    left: 15px; /* Initial padding */
+}
+
+#preview ul {
+    margin-bottom: 30px;
+}
+
+#preview li {
+    margin-left: 25px;
+    margin-bottom: 5px;
+}
+
+.item_title {
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 20px;
+}
+
+#preview video {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    width: 60%;
+    height: auto;
+    border: 1px solid #5EFFAB;
+    box-shadow:
+      inset 0 0 6px #5EFFAB,
+      0 0 4px #5EFFAB;
+    background: black;
+  }
+
+#spacer {
+    height: 60px;
+}
