@@ -25,7 +25,14 @@ export var deploy = '';
     });
 
 
+
 function initTerminal() {
+
+    document.body.addEventListener('touchstart', () => {
+        const input = document.getElementById('keyboardProxy');
+        input.focus();
+      });
+
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<h1 class="hello">${hello_Message}</h1>`);
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "help-msg">Enter 'help' to see available commands.</p>`);
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`);
