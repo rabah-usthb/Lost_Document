@@ -28,7 +28,7 @@ export var deploy = '';
 
 function initTerminal() {
 
-    document.body.addEventListener('touchstart', () => {
+    document.body.addEventListener('click', () => {
         const input = document.getElementById('keyboardProxy');
         input.focus();
       });
