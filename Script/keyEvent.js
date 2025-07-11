@@ -30,27 +30,19 @@ function runCommand(command) {
     switch (command) {
         case 'whoami':
            terminal.terminal_content.insertAdjacentHTML('beforeend',`<div class="info-terminal">
-  <table>
-    <tr>
-      <td style="vertical-align: top; white-space: pre;">
         <pre id = "face">${init.face}</pre>
-      </td>
-      <td style="vertical-align: top;">
-        <table class="info">
-          <tr><td><span class='bullet'>• FULL NAME : </span>RABAH CHABANE CHAOUCHE</td></tr>
-          <tr><td><span class='bullet'>• COUNTRY : </span>ALGERIA</td></tr>
-          <tr><td><span class='bullet'>• AGE : </span>20</td></tr>
-          <tr><td><span class='bullet'>• UNIVERSITY : </span>The University of Science and Technology-Houari Boumediene</td></tr>
-          <tr><td><span class='bullet'>• LEVEL : </span>3RD YEAR SOFTWARE ENGINEER</td></tr>
-          <tr><td><span class='bullet'>• EXPECTED GRADUATION : </span>June 2027</td></tr>
-          <tr><td><span class='bullet'>• EMAIL : </span>chabanechaoucherabah4@gmail.com</td></tr>
-          <tr><td><span class='bullet'>• GITHUB : </span><a href="https://github.com/rabah-usthb" target="_blank">github.com/rabah-usthb</a></td></tr>
-          <tr><td><span class='bullet'>• SKILLS : </span>LaTeX, Java, JavaFX, PHP, C, JS</td></tr>
-          <tr><td><span class='bullet'>• LANGUAGES : </span>Arabic, Kabyle, French, English</td></tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+        <div id="item-div">
+          <div><span class='bullet'>• FULL NAME : </span>RABAH CHABANE CHAOUCHE</div>
+          <div><span class='bullet'>• COUNTRY : </span>ALGERIA</div>
+          <div><span class='bullet'>• AGE : </span>20</div>
+          <div><span class='bullet'>• UNIVERSITY : </span>The University of Science and Technology-Houari Boumediene</div>
+          <div><span class='bullet'>• LEVEL : </span>3RD YEAR SOFTWARE ENGINEER</div>
+          <div><span class='bullet'>• EXPECTED GRADUATION : </span>June 2027</div>
+          <div><span class='bullet'>• EMAIL : </span>chabanechaoucherabah4@gmail.com</div>
+          <div><span class='bullet'>• GITHUB : </span><a href="https://github.com/rabah-usthb" target="_blank">github.com/rabah-usthb</a></div>
+          <div><span class='bullet'>• SKILLS : </span>LaTeX, Java, JavaFX, PHP, C, JS </div>
+          <div><span class='bullet'>• LANGUAGES : </span>Arabic, Kabyle, French, English </div>
+        </div>
 </div>
 `
 );
@@ -115,7 +107,7 @@ function runCommand(command) {
                     </tr>
                     <tr>
                         <td>projects</td>
-                        <td>Displays a project table where each row is clickable to open a preview.</br>Press 'Q' or 'q' to quit the preview.</td>
+                        <td class="wrap-text">Displays a project table where each row is clickable to open a preview.</br>Press 'Q' or 'q' to quit the preview.</td>
                     </tr>
                     <tr>
                         <td>reboot</td>

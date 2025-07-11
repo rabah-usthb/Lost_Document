@@ -28,12 +28,13 @@ export var deploy = '';
 
 function initTerminal() {
 
-    
+   /* 
     document.body.addEventListener('touchend', (e) => {
         e.preventDefault();
         const input = document.getElementById('keyboardProxy');
         input.focus();
       });
+      */
       
 
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<h1 class="hello">${hello_Message}</h1>`);
