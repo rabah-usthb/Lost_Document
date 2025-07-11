@@ -3,7 +3,6 @@ import * as keyEvent from './keyEvent.js';
 
 
 export var hello_Message = ''; 
-export var face = '';
 export var who_data = '';
 export var download = '';
 export var link = '';
@@ -14,7 +13,6 @@ export var deploy = '';
 
  fetch('../Ascii/hello.txt').then(r => r.text()).then((data) => {
     fetch('../Ascii/data.txt').then(r => r.text()).then((data) => { who_data = data;});
-    fetch('../Ascii/face.txt').then(r => r.text()).then((data) => { face = data;});
     fetch('../Ascii/down.txt').then(r => r.text()).then((data) => { download = data;});
     fetch('../Ascii/feat.txt').then(r => r.text()).then((data) => { features= data;});
     fetch('../Ascii/des.txt').then(r => r.text()).then((data) => { description = data;});
@@ -39,7 +37,8 @@ function initTerminal() {
 
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<h1 class="hello">${hello_Message}</h1>`);
     terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "help-msg">Enter 'help' to see available commands.</p>`);
-    terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`);
+    //terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "line"><span class = "username">${terminal.prompt}</span><span id="blink">■</span> </p>`);
+    terminal.terminal_content.insertAdjacentHTML('beforeend',`<p class = "line"><span class = "username">${terminal.prompt}</span><span id="input" contenteditable="true"></span><span id="blink">■</span> </p>`);
     terminal.setCommandLine(document.querySelector('.line'));
     console.log(terminal.commandLine.childNodes);
     keyEvent.setCursor(terminal.commandLine.childNodes[1]);

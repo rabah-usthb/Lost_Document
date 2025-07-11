@@ -30,7 +30,7 @@ function runCommand(command) {
     switch (command) {
         case 'whoami':
            terminal.terminal_content.insertAdjacentHTML('beforeend',`<div class="info-terminal">
-        <pre id = "face">${init.face}</pre>
+        <div id = "face"><img src="Ascii/face.webp" id="face-img"/></div>
         <div id="item-div">
           <div><span class='bullet'>• FULL NAME : </span>RABAH CHABANE CHAOUCHE</div>
           <div><span class='bullet'>• COUNTRY : </span>ALGERIA</div>
