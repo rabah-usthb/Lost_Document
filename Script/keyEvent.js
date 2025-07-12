@@ -371,6 +371,7 @@ export function handleKey(e,keyboardValue) {
         else {
             quitButton = preview.querySelector('#quit-button');
             setQuitMobileEvent();
+            init.keyboard.style.display='flex';
             console.log('quit button-kun ',quitButton);
         }
         document.removeEventListener('keydown',previewEvent);
@@ -411,6 +412,7 @@ export function handleKey(e,keyboardValue) {
               if(init.keyboard!=='') {
                 quitButton.style.display='inline-block';
                 quitButton.disabled = false;
+                init.keyboard.style.display='none';
             }
 
               else {
