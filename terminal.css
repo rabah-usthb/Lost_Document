@@ -29,10 +29,9 @@ body {
 }
 
 
-#input {
-  opacity: 0;
-  pointer-events: none;
-  z-index: -1;
+.command-input {
+ width: 100%;
+ border: none;
 }
 
 .hello {

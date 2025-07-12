@@ -1,0 +1,85 @@
+.border {
+    background-color: transparent;
+    border: 1px solid currentColor;
+    box-shadow: inset 0 0 8px currentColor, 0 0 4px currentColor;  
+}
+
+#main-container {
+    position: fixed;
+    bottom: 5%;
+    max-width: 90%;
+    padding: 1.25em;
+    border-radius: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    box-sizing: border-box;
+    font-size: 0.5rem;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding-left: 2em;
+}
+
+.row {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+
+.col {
+    flex: 0 0 auto;
+    padding: 0.65em;
+    text-align: center;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-weight: bold;
+    user-select: none;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+
+.col:hover {
+    background-color: hsla(154, 84%, 30%, 0.3);
+    transform: translateY(-2px);
+    box-shadow: inset 0 0 12px currentColor, 0 0 8px currentColor;
+}
+
+.col:active {
+    background-color: hsla(154, 84%, 50%, 0.4);
+    transform: translateY(0);
+    box-shadow: inset 0 0 6px currentColor, 0 0 2px currentColor;
+}
+
+.col-key {
+    width: 3.25em;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#del {
+    width: 5em;
+}
+
+.enter {
+    width: 5.5em;
+}
+
+.space {
+    width: 25em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.arrow {
+    width: 2.5em;
+}
+
+.m {
+margin-right: 2.25em;
+}

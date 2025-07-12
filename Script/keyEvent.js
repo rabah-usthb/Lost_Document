@@ -3,6 +3,25 @@ import * as init from './init.js';
 import * as terminal from './terminal.js';
 import * as history from './history.js';
 
+const quitButton = document.getElementById("quit-button");
+
+
+export function setupKeyEvents() {
+    document.querySelectorAll('.col').forEach(key => {
+      key.addEventListener('click', () => {
+        const keyValue = key.dataset.value;
+        handleKey(null,keyValue);
+      });
+    });
+  }
+  
+export function setQuitMobileEvent() {
+    quitButton.addEventListener('click',() => {
+        sound.mouseSound();
+        quitPreview();
+    })
+}
+
 function linkEvent() {
     document.querySelectorAll('a').forEach(link=> {
         link.addEventListener('click', (e) => {
@@ -16,6 +35,9 @@ function linkEvent() {
 
 var cursor = '';
 const preview = document.getElementById('preview');
+
+export const keyLaptop = (e) => handleKey(e, null);
+
 
 export function setCursor(node) {
     cursor = node;
@@ -250,15 +272,31 @@ function ArrowRightEvent() {
   }
 }
 
-export function handleKey(e) {
+export function handleKey(e,keyboardValue) {
 
-    console.log(terminal.commandLine,' ',e.key);
-    if (e.key === ' ') {
+    console.log('eeeeeee ',e);
+    console.log('key ',keyboardValue);
+
+    var value='';
+   
+    if(keyboardValue!==null) {
+        console.log('hiiiiiiiii');
+        value = keyboardValue;
+    }
+    else {
+        console.log('hiiiiiiiii');
+        value = e.key;
+    }
+
+    
+    if (value === ' ') {
+        if(e!==null) {
         e.preventDefault();
+        }
         sound.spaceSound();
       }
 
-    else if (e.key ==='Enter') {
+    else if (value ==='Enter') {
         sound.enterSound();
     }
     else {
@@ -266,43 +304,51 @@ export function handleKey(e) {
     }
 
     
-    if(e.key==='Backspace') {
+    if(value==='Backspace') {
         BackspaceEvent();
     }
-    else if (e.key==='Enter') {
+    else if (value==='Enter') {
         EnterEvent();
     }
-    else if(e.key==='ArrowLeft') {
-        e.preventDefault();
+    else if(value==='ArrowLeft') {
+        if(e!==null) {
+            e.preventDefault();
+            }
         ArrowLeftEvent();
       
     }
-    else if(e.key==='ArrowRight'){ 
-        e.preventDefault();
+    else if(value==='ArrowRight'){ 
+        if(e!==null) {
+            e.preventDefault();
+            }
         ArrowRightEvent();
     }
-    else if(e.key==='ArrowUp') {
-        e.preventDefault();
+    else if(value==='ArrowUp') {
+        if(e!==null) {
+            e.preventDefault();
+            }
         if(history.index >0){
             ArrowUpEvent();
         }
     }
-    else if(e.key === 'ArrowDown') {
-        e.preventDefault();
+    else if(value === 'ArrowDown') {
+        if(e!==null) {
+            e.preventDefault();
+            }
         if(history.index <(history.commandHistory.length-1)){
         ArrowDownEvent();
         }
     }
-    else if( e.key.length===1 &&(e.key ===' ' ||(e.key>='a' && e.key<='z') || (e.key>='A' && e.key<='Z'))){
+    else if( value.length===1 &&(value ===' ' ||(value>='a' && value<='z') || (value>='A' && value<='Z'))){
     const previousNode = cursor.previousSibling;
    // console.log(terminal.commandLine.childNodes)
     if(isTextNode(previousNode)) {
-        const newText = previousNode.data + e.key;
+        const newText = previousNode.data + value;
         previousNode.data = newText;
         
     }
     else {
-    const newText = document.createTextNode(e.key);
+    const newText = document.createTextNode(value);
     terminal.commandLine.insertBefore(newText,cursor);
     }
     }
@@ -317,8 +363,12 @@ export function handleKey(e) {
             <div id="fileName"></div>
           </div>
           <div class="glare"></div>`;
-        document.addEventListener('keydown', handleKey);
+        
+        if(init.keyboard==='') {
+        document.addEventListener('keydown' ,keyLaptop);
+        }
         document.removeEventListener('keydown',previewEvent);
+        
     }
 
 
@@ -344,10 +394,20 @@ export function handleKey(e) {
    
 
     function rowEvent() {
+
+        if(init.keyboard!=='') {
+            quitButton.style.display='inline-block';
+            quitButton.disabled = false;
+            
+        }
+
         document.querySelectorAll('.clickable-row').forEach(btn=> {
             btn.addEventListener('click', () => {
               sound.mouseSound();
-              document.removeEventListener('keydown', handleKey);
+              if(init.keyboard==='') {
+                console.log("not mobile");
+                document.removeEventListener('keydown', keyLaptop);
+              }
               document.addEventListener('keydown',previewEvent);
               document.getElementById('fileName').textContent = btn.dataset.path;
               preview.insertAdjacentHTML('beforeend',`<h1>${init.description}</h1>`);

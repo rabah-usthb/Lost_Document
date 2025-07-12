@@ -20,16 +20,16 @@
     position: fixed;
     bottom: 0.5%;
     width: 100%;
+    justify-content: space-between;
     background:hsl(154, 47%, 3%);
     color:  hsl(154 84% 70%);
-    font-size: 15px;
+    font-size: 1rem;
     padding: 8px 25px;
     display: flex;
     border: 1px solid hsl(154 84% 70%);;
     box-shadow:
     inset 0 0 8px currentColor,  0 0 4px currentColor;    
     z-index: 99;
-    padding-right:40px ;
 }
 
 #fileName {
@@ -51,7 +51,7 @@
 
 #preview h1 {        
     white-space: pre;               
-    font-size: 11px;
+    font-size: 0.75rem;
     margin-bottom: 20px;
     margin-left: 10px;
 }
@@ -89,7 +89,7 @@
 .item_title {
     font-weight: bold;
     text-decoration: underline;
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 #preview video {
@@ -109,3 +109,29 @@
 #spacer {
     height: 60px;
 }
+
+
+@media only screen and (max-width: 768px) {
+    #preview h1 {                    
+        font-size: 0.35rem;
+    }
+
+    .item_title {
+        font-size: 0.55rem;
+    }
+
+    #status-bar {
+        font-size: 0.65rem;
+    }
+    
+    #quit-button{
+        padding: 0.25em 0.75em;
+        background-color: transparent;
+        border: 1px solid currentColor;
+        box-shadow: inset 0 0 8px currentColor, 0 0 4px currentColor;  
+    }
+
+
+
+  }
+
