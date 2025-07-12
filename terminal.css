@@ -220,6 +220,11 @@ body {
       font-size: 0.5rem;
     }
 
+    .terminal { 
+      padding-bottom: 25em;
+  }
+  
+
     .hello{
      font-size: 0.5rem;
     }

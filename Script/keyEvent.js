@@ -206,6 +206,7 @@ function EnterEvent() {
     }
 
     document.body.scrollIntoView({ block: "end", behavior: "smooth" });
+   
 }
 
 
