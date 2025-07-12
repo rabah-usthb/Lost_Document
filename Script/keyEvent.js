@@ -3,7 +3,7 @@ import * as init from './init.js';
 import * as terminal from './terminal.js';
 import * as history from './history.js';
 
-const quitButton = document.getElementById("quit-button");
+var quitButton = document.getElementById("quit-button");
 
 
 export function setupKeyEvents() {
@@ -359,14 +359,19 @@ export function handleKey(e,keyboardValue) {
     function quitPreview() {
         console.log('quit ');
         preview.classList.replace('active', 'hidden');
-        preview.innerHTML =` <span id="preview_cursor"></span>
+        preview.innerHTML =` 
           <div id="status-bar">
             <div id="fileName"></div>
+              <button id="quit-button" style="display: none;">Quit</button>
           </div>
           <div class="glare"></div>`;
-        
         if(init.keyboard==='') {
         document.addEventListener('keydown' ,keyLaptop);
+        }
+        else {
+            quitButton = preview.querySelector('#quit-button');
+            setQuitMobileEvent();
+            console.log('quit button-kun ',quitButton);
         }
         document.removeEventListener('keydown',previewEvent);
         
@@ -396,16 +401,19 @@ export function handleKey(e,keyboardValue) {
 
     function rowEvent() {
 
-        if(init.keyboard!=='') {
-            quitButton.style.display='inline-block';
-            quitButton.disabled = false;
-            
-        }
 
         document.querySelectorAll('.clickable-row').forEach(btn=> {
+
+
             btn.addEventListener('click', () => {
               sound.mouseSound();
-              if(init.keyboard==='') {
+
+              if(init.keyboard!=='') {
+                quitButton.style.display='inline-block';
+                quitButton.disabled = false;
+            }
+
+              else {
                 console.log("not mobile");
                 document.removeEventListener('keydown', keyLaptop);
               }
